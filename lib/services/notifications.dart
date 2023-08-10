@@ -12,7 +12,7 @@ class NotificationApi {
 
   static Future init({bool initScheduled = false}) async {
     const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-    final settings = const InitializationSettings(android: android);
+    const settings = InitializationSettings(android: android);
     await _notifications.initialize(settings,
         onDidReceiveNotificationResponse: (payLoad) async {
       onNotifications.add(payLoad.toString());
@@ -21,6 +21,7 @@ class NotificationApi {
 
   static Future showNotification(
       {int id = 2, String? title, String? body, String? payload}) async {
-    return _notifications.show(id, title, body, await _notificationDetails());
+    return _notifications.show(id, title, body, await _notificationDetails(),
+        payload: payload);
   }
 }

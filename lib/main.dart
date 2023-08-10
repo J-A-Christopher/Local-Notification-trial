@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:push_notifications_app/routes/second_page.dart';
 import 'package:push_notifications_app/services/notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,6 +10,8 @@ void main() async {
       .initialize(const InitializationSettings(
     android: AndroidInitializationSettings('flutter_logo'),
   ));
+  tz.initializeTimeZones();
+
   runApp(const MyWidget());
 }
 
@@ -23,7 +26,6 @@ class _MyWidgetState extends State<MyWidget> {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     NotificationApi.init();
     listenNotifications();
